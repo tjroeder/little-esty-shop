@@ -46,6 +46,21 @@ class ItemsController < ApplicationController
     end
   end
 
+  def status_change
+    @merchant = Merchant.find(params[:merchant_id])
+    item = Item.find(params[:item_id])
+    if item.status == "Disabled"
+      item.status = 'Enabled'
+      item.save
+      redirect_to "/merchants/#{@merchant.id}/items/"
+    elsif item.status == 'Enabled'
+      item.status = 'Disabled'
+      item.save
+
+      redirect_to "/merchants/#{@merchant.id}/items/"
+    end
+  end
+
   # DELETE /items/1 or /items/1.json
   def destroy
     @item.destroy
