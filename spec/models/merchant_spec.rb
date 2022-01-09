@@ -22,12 +22,13 @@ RSpec.describe Merchant, type: :model do
   let!(:item_9) { Item.create!(name: 'item_9', description: 'desc_9', unit_price: 9, merchant: merch_1) }
   let!(:item_10) { Item.create!(name: 'item_10', description: 'desc_10', unit_price: 10, status: 'Enabled', merchant: merch_1) }
 
-  let!(:invoice_1) { Invoice.create!(status: 2, customer: cust_1) }
-  let!(:invoice_2) { Invoice.create!(status: 2, customer: cust_2) }
-  let!(:invoice_3) { Invoice.create!(status: 2, customer: cust_3) }
-  let!(:invoice_4) { Invoice.create!(status: 2, customer: cust_4) }
-  let!(:invoice_5) { Invoice.create!(status: 2, customer: cust_5) }
-  let!(:invoice_6) { Invoice.create!(status: 2, customer: cust_6) }
+
+   let!(:invoice_1) { Invoice.create!(status: 2, customer: cust_1) }
+   let!(:invoice_2) { Invoice.create!(status: 2, customer: cust_2) }
+   let!(:invoice_5) { Invoice.create!(status: 2, customer: cust_5) }
+   let!(:invoice_4) { Invoice.create!(status: 2, customer: cust_4) }
+   let!(:invoice_3) { Invoice.create!(status: 2, customer: cust_3) }
+   let!(:invoice_6) { Invoice.create!(status: 2, customer: cust_6) }
 
   let!(:ii_1) { InvoiceItem.create!(item: item_1, invoice: invoice_1, quantity: 1, unit_price: 1, status: 0) }
   let!(:ii_2) { InvoiceItem.create!(item: item_2, invoice: invoice_2, quantity: 2, unit_price: 2, status: 1) }
@@ -77,7 +78,7 @@ RSpec.describe Merchant, type: :model do
       expected = [item_2.name, item_3.name, item_5.name]
       expect(merch_1.items_ready_ship.pluck(:name)).to eq(expected)
     end
-    
+
     it "checks that the invoices are in order" do
       expected = [invoice_1, invoice_2, invoice_5, invoice_4, invoice_3, invoice_6]
       test = merch_1.order_by_invoice
