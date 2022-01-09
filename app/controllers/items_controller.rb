@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: %i[ show edit update destroy ]
+  # before_action :set_item, only: %i[ show edit update destroy ]
 
   # GET /items or /items.json
   def index
@@ -28,7 +28,7 @@ class ItemsController < ApplicationController
     merchant = Merchant.find(params[:merchant_id])
     item = Item.new(item_params)
     item.save
-    redirect_to "/merchants/#{merchant.id}/items/"
+    redirect_to "/merchants/#{merchant.id}/items"
   end
 
   # PATCH/PUT /items/1 or /items/1.json
@@ -52,29 +52,28 @@ class ItemsController < ApplicationController
     if item.status == "Disabled"
       item.status = 'Enabled'
       item.save
-      redirect_to "/merchants/#{@merchant.id}/items/"
+      redirect_to "/merchants/#{@merchant.id}/items"
     elsif item.status == 'Enabled'
       item.status = 'Disabled'
       item.save
-
-      redirect_to "/merchants/#{@merchant.id}/items/"
+      redirect_to "/merchants/#{@merchant.id}/items"
     end
   end
 
   # DELETE /items/1 or /items/1.json
-  def destroy
-    @item.destroy
-    respond_to do |format|
-      format.html { redirect_to items_url, notice: "Item was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
+  # def destroy
+  #   @item.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to items_url, notice: "Item was successfully destroyed." }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
   private
   # Use callbacks to share common setup or constraints between actions.
-  def set_item
-    @item = Item.find(params[:id])
-  end
+  # def set_item
+  #   @item = Item.find(params[:id])
+  # end
 
   # Only allow a list of trusted parameters through.
   def item_params
