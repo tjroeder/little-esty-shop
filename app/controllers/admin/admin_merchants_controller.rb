@@ -1,3 +1,0 @@
-class Admin::MerchantsController
-  
-end
