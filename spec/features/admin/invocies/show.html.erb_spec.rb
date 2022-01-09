@@ -18,16 +18,16 @@ RSpec.describe 'admin invoices index dashboard page', type: :feature do
     expect(page).to have_content("Invoice - #{invoice_1.id}")
   end
 
-  xit "checks that the invoice status shows" do
-
+  it "checks that the invoice status shows" do
+    expect(page).to have_content("Status: #{invoice_1.status}")
   end
 
-  xit "checks invoice created date/time" do
-
+  it "checks invoice created date/time" do
+    expect(page).to have_content("Created on: #{invoice_1.created_at_formatted}")
   end
 
-  xit "shows the customers name" do
-
+  it "shows the customers name" do
+    expect(page).to have_content("Customer: #{invoice_1.customer.customer_full_name}")
   end
 
 end
