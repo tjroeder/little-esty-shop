@@ -24,9 +24,9 @@ class Merchant < ApplicationRecord
   end
 
   def items_ready_ship
-    invoice_items.where('status = 1')
+    invoice_items.where('invoice_items.status = ?', 1)
   end 
-  
+
   def order_by_invoice
     invoices.order(:created_at).distinct
   end
