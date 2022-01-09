@@ -98,7 +98,7 @@ RSpec.describe Merchant, type: :model do
   end
 
   describe 'Merchant Items Index: 5 most popular items' do
-    it 'shows top 5 items ranked by most popular' do
+    it 'shows top 5 items ranked by most popular/most revenue' do
       expect(merch_1.top_five_items).to eq([item_4, item_3, item_6, item_2, item_1])
     end
   end
