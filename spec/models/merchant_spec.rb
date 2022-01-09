@@ -67,7 +67,6 @@ RSpec.describe Merchant, type: :model do
 
   describe 'Merchant Dashboard Statistics' do
     it "shows top 5 customers that have most successful transactions" do
-
       expected = [cust_1.first_name, cust_2.first_name, cust_3.first_name, cust_4.first_name, cust_6.first_name]
       expect(merch_1.top_customers.pluck(:first_name)).to eq(expected)
     end
