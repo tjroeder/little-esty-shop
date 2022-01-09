@@ -93,13 +93,12 @@ RSpec.describe Invoice, type: :model do
     end 
     
     describe '#total_revenue' do
-      # TODO add in the quantity to the total revenue
       it 'should return the total revenue for the invoice' do
         invoice_1 = create(:invoice)
         items = create_list(:item, 3)
         invoice_item_1 = create(:invoice_item, item: items[0], invoice: invoice_1, unit_price: 100, quantity: 2)
         invoice_item_2 = create(:invoice_item, item: items[1], invoice: invoice_1, unit_price: 200, quantity: 4)
-        invoice_item_3 = create(:invoice_item, item: items[2], invoice: invoice_1, unit_price: 300)
+        invoice_item_3 = create(:invoice_item, item: items[2], invoice: invoice_1, unit_price: 300, quantity: 1)
 
         expect(invoice_1.total_revenue).to eq('$13.00')
       end
