@@ -55,5 +55,13 @@ RSpec.describe Customer, type: :model do
         expect(customer.full_name).to eq('Joe Dirt')
       end
     end
+
+    describe '#purchase_count' do
+      it 'returns the total purchase count' do
+        customer = create(:customer_with_transactions, transaction_count: 4, transaction_result: :success)
+
+        expect(customer.purchase_count).to eq(4)
+      end
+    end
   end
 end
