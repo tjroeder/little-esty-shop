@@ -7,4 +7,8 @@ class Customer < ApplicationRecord
 
   validates :first_name, presence: true
   validates :last_name, presence: true
+
+  def customer_full_name
+    first_name + " " + last_name
+  end
 end
