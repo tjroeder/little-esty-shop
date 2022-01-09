@@ -53,7 +53,8 @@ class ItemsController < ApplicationController
       item.status = 'Enabled'
       item.save
       redirect_to "/merchants/#{@merchant.id}/items"
-    elsif item.status == 'Enabled'
+    # elsif item.status == 'Enabled'
+    else
       item.status = 'Disabled'
       item.save
       redirect_to "/merchants/#{@merchant.id}/items"
