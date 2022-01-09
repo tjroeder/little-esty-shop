@@ -21,4 +21,8 @@ class Customer < ApplicationRecord
   def full_name
     first_name + ' ' + last_name
   end
+
+  def purchase_count
+    transactions.where('transactions.result = ?', 2).count(:transactions)
+  end
 end
