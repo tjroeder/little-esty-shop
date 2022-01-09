@@ -1,3 +1,0 @@
-class Admin::InvoicesController
-  
-end
