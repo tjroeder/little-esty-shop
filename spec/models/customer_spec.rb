@@ -46,4 +46,14 @@ RSpec.describe Customer, type: :model do
       end
     end
   end
+
+  describe 'instance methods' do
+    describe '#full_name' do
+      it 'returns the customers full name' do
+        customer = build(:customer, first_name: 'Joe', last_name: 'Dirt')
+
+        expect(customer.full_name).to eq('Joe Dirt')
+      end
+    end
+  end
 end
