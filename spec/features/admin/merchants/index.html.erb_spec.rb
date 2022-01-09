@@ -12,4 +12,10 @@ RSpec.describe 'admin merchants index dashboard page', type: :feature do
       end
     end
   end
+    describe 'link to admin merchant show page' do
+      it "links to the admin merchant show page" do
+        click_link "#{merch_1.name}"
+        expect(current_path).to eq(admin_merchant_path(merch_1))
+      end
+    end
 end
