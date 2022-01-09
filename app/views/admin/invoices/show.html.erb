@@ -2,4 +2,6 @@
 <p>Status: <%= @invoices.status %></p>
 <p>Created on: <%= @invoices.created_at_formatted %></p>
 <p>Customer: <%= @invoices.customer.customer_full_name %></p>
-<h3>Items: <%=  %> </h3>
+<h3>Items: <% @invoices.items.each do |item| %> </h3>
+  <p> <%= item.name %> </p>
+  <% end  %>
