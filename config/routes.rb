@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   resources :merchants do
-    resources :dashboards, only: [:index]
+    resources :dashboard, only: [:index]
     resources :items do
       patch 'status_change'
     end
