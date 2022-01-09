@@ -11,6 +11,10 @@ class Merchant < ApplicationRecord
     items.where(status: "Disabled")
   end
 
+  def enabled_items
+    items.where(status: "Enabled")
+  end
+
   def top_customers
      transactions.joins(invoice: :customer)
                  .where('result =?',2)
@@ -25,5 +29,13 @@ class Merchant < ApplicationRecord
   
   def order_by_invoice
     invoices.order(:created_at).distinct
+  end
+
+  def top_five_items
+    items.joins({invoice_items: {invoice: :transactions}})
+    .select("items.*, SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue")
+    .group(:id).where(transactions: {result: 2})
+    .order(revenue: :desc)
+    .limit(5)
   end
 end

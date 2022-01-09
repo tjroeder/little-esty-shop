@@ -61,6 +61,7 @@ RSpec.describe 'merchant dashboard page', type: :feature do
         expect(page).to have_content(merch_1.name)
       end
     end
+
     describe 'view links' do
       it "displays link to merchant item index " do
 
