@@ -3,7 +3,8 @@ FactoryBot.define do
     sequence(:name) { |n| "item_#{n}" }
     sequence(:description) { |n| "desc_#{n}" }
     sequence(:unit_price)
-    status { 'Disabled' }
+    status { "Disabled" }
+    merchant
     
     factory :with_invoices do
       transient do
@@ -14,7 +15,6 @@ FactoryBot.define do
         create_list(:invoice, evaluator.invoice_count, items: item)
         item.reload
       end
-      merchant
     end
   end
 end
