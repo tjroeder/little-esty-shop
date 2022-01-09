@@ -12,8 +12,7 @@ RSpec.describe "items/new", type: :feature do
     fill_in(:description, with: "Lightly used.")
     fill_in(:unit_price, with: 1000)
     click_button "Create"
-    expect(current_path).to eq("/merchants/#{@merchant_1.id}/items/")
-    save_and_open_page
+    expect(current_path).to eq(merchant_items_path(@merchant_1))
     expect(page).to have_content("PB&J")
     click_link "PB&J"
     expect(page).to have_content("Lightly used.")
