@@ -124,7 +124,6 @@ RSpec.describe 'merchant invoice show page', type: :feature do
         end
 
         expect(page).to have_current_path(merchant_invoice_path(merch_1, invoice_1))
-    
       end
     end
   end
