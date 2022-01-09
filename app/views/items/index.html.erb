@@ -1,7 +1,9 @@
 <h1>Items</h1>
 
-<h2></h2>
-
+<h2>Top 5 Items Based on Total Revenue</h2>
+  <%@merchant.top_five_items.each do |item| %>
+    <p><%= item.name %></p>
+  <% end %>
 
 <h2>Enabled Items</h2>
 <% @merchant.enabled_items.each do |item| %>
