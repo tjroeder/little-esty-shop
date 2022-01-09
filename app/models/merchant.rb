@@ -17,15 +17,18 @@ class Merchant < ApplicationRecord
 
   def top_customers
      transactions.joins(invoice: :customer)
-    .where('result =?',2)
-    .select('customers.*,count(transactions) as count_transaction')
-    .group('customers.id')
-    .order(count: :desc).limit(5)
+                 .where('result =?',2)
+                 .select('customers.*,count(transactions) as count_transaction')
+                 .group('customers.id')
+                 .order(count: :desc).limit(5)
   end
 
   def items_ready_ship
     invoice_items.where('status = 1')
-
+  end 
+  
+  def order_by_invoice
+    invoices.order(:created_at).distinct
   end
 
   def top_five_items

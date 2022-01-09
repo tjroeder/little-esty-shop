@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Merchant, type: :model do
-
-
   let!(:merch_1) { Merchant.create!(name: 'name_1') }
   let!(:merch_2) { create(:merch_w_all, customer_count: 2) }
 
@@ -24,14 +22,12 @@ RSpec.describe Merchant, type: :model do
   let!(:item_9) { Item.create!(name: 'item_9', description: 'desc_9', unit_price: 9, merchant: merch_1) }
   let!(:item_10) { Item.create!(name: 'item_10', description: 'desc_10', unit_price: 10, status: 'Enabled', merchant: merch_1) }
 
-
   let!(:invoice_1) { Invoice.create!(status: 2, customer: cust_1) }
   let!(:invoice_2) { Invoice.create!(status: 2, customer: cust_2) }
   let!(:invoice_3) { Invoice.create!(status: 2, customer: cust_3) }
   let!(:invoice_4) { Invoice.create!(status: 2, customer: cust_4) }
   let!(:invoice_5) { Invoice.create!(status: 2, customer: cust_5) }
   let!(:invoice_6) { Invoice.create!(status: 2, customer: cust_6) }
-
 
   let!(:ii_1) { InvoiceItem.create!(item: item_1, invoice: invoice_1, quantity: 1, unit_price: 1, status: 0) }
   let!(:ii_2) { InvoiceItem.create!(item: item_2, invoice: invoice_2, quantity: 2, unit_price: 2, status: 1) }
@@ -40,7 +36,6 @@ RSpec.describe Merchant, type: :model do
   let!(:ii_5) { InvoiceItem.create!(item: item_5, invoice: invoice_5, quantity: 3, unit_price: 5, status: 1) }
   let!(:ii_6) { InvoiceItem.create!(item: item_6, invoice: invoice_6, quantity: 3, unit_price: 6, status: 2) }
   # let!(:ii_7) { InvoiceItem.create!(item: item_7, invoice: invoice_7, quantity: 3, unit_price: 7, status: 2) }
-
 
   let!(:transactions_1) { Transaction.create!(invoice_id: invoice_1.id, credit_card_number: "4654405418240001", credit_card_expiration_date: "0001", result: 2)}
   let!(:transactions_2) { Transaction.create!(invoice_id: invoice_1.id, credit_card_number: "4654405418240002", credit_card_expiration_date: "0002", result: 2)}
@@ -56,6 +51,7 @@ RSpec.describe Merchant, type: :model do
   let!(:transactions_12) { Transaction.create!(invoice_id: invoice_6.id, credit_card_number: "4654405418240012", credit_card_expiration_date: "0012", result: 1)}
   # let!(:transactions_13) { Transaction.create!(invoice_id: invoice_7.id, credit_card_number: "4654405418240013", credit_card_expiration_date: "0013", result: 2)}
   # let!(:transactions_14) { Transaction.create!(invoice_id: invoice_7.id, credit_card_number: "4654405418240014", credit_card_expiration_date: "0014", result: 2)}
+
   describe 'relationships' do
     it {should have_many(:items)}
     it {should have_many(:invoice_items).through(:items)}
@@ -76,14 +72,16 @@ RSpec.describe Merchant, type: :model do
     end
   end
 
-  describe 'Merchant Bashboard Items Ready to ship' do
+  describe 'Merchant Dashboard Items Ready to ship' do
     it "shows the item is ready to ship" do
       expected = [item_2.name, item_3.name, item_5.name]
       expect(merch_1.items_ready_ship.pluck(:name)).to eq(expected)
     end
-
-    it "shows the items ids" do
-      expected = [item_2.invoices.ids, item_3.invoices.ids, item_5.invoices.ids]
+    
+    it "checks that the invoices are in order" do
+      expected = [invoice_1, invoice_2, invoice_5, invoice_4, invoice_3, invoice_6]
+      test = merch_1.order_by_invoice
+      expect(test.to_a).to eq(expected)
     end
   end
 

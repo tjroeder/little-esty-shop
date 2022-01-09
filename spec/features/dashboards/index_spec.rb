@@ -23,10 +23,11 @@ RSpec.describe 'merchant dashboard page', type: :feature do
 
 
   let!(:invoice_1) { Invoice.create!(status: 2, customer: cust_1) }
+  sleep(0.01)
   let!(:invoice_2) { Invoice.create!(status: 2, customer: cust_2) }
-  let!(:invoice_3) { Invoice.create!(status: 2, customer: cust_3) }
-  let!(:invoice_4) { Invoice.create!(status: 2, customer: cust_4) }
   let!(:invoice_5) { Invoice.create!(status: 2, customer: cust_5) }
+  let!(:invoice_4) { Invoice.create!(status: 2, customer: cust_4) }
+  let!(:invoice_3) { Invoice.create!(status: 2, customer: cust_3) }
   let!(:invoice_6) { Invoice.create!(status: 2, customer: cust_6) }
 
 
@@ -52,7 +53,7 @@ RSpec.describe 'merchant dashboard page', type: :feature do
   let!(:transactions_11) { Transaction.create!(invoice_id: invoice_6.id, credit_card_number: "4654405418240011", credit_card_expiration_date: "0011", result: 2)}
   let!(:transactions_12) { Transaction.create!(invoice_id: invoice_6.id, credit_card_number: "4654405418240012", credit_card_expiration_date: "0012", result: 1)}
 
-  before(:each) { visit merchant_dashboards_path(merch_1) }
+  before(:each) { visit merchant_dashboard_index_path(merch_1) }
 
   describe 'as a user' do
     describe 'view elements' do
@@ -99,6 +100,16 @@ RSpec.describe 'merchant dashboard page', type: :feature do
         expect(page).to have_content("Invoice id# #{item_2.invoices.ids.first}" )
         expect(page).to have_content("Invoice id# #{item_3.invoices.ids.first}")
         expect(page).to have_content("Invoice id# #{item_5.invoices.ids.first}")
+      end
+
+      it "has a link for the invoice id that leads to the invoice show page" do
+        click_link "#{item_2.invoices.ids.first}"
+        expect(current_path).to eq("/merchants/#{merch_1.id}/invoices/#{item_2.invoices.ids.first}")
+      end
+
+      it "shows the items in order of invoice tiem created" do
+        expect(item_2.name).to appear_before(item_5.name)
+        expect(item_5.name).to appear_before(item_3.name)
       end
     end
   end

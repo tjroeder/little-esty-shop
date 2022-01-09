@@ -5,7 +5,15 @@ Rails.application.routes.draw do
     resources :items do
       patch 'status_change'
     end
-    resources :invoices, only: [:index, :show]
+    resources :items
+    resources :invoices, only: [:index, :show] # TODO Update to use merchant_invoices controller
+    resources :invoice_items, only: [:update]
+  end
+
+  resources :admin, only: [:index]
+  namespace :admin do
+    resources :merchants, only: [:index, :show]
+    resources :invoices, only: [:index]
   end
 
   resources :transactions
