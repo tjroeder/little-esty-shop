@@ -22,6 +22,6 @@ class Invoice < ApplicationRecord
   end
   
   def total_revenue
-    cents_to_dollars(invoice_items.sum(:unit_price))
+    cents_to_dollars(invoice_items.sum('unit_price * quantity'))
   end
 end
