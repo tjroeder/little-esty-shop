@@ -7,4 +7,4 @@
 <p>Description: <%= @item.description %></p>
 <p>Current Selling Price: <%= @item.unit_price %></p>
 
-<%= link_to 'Edit Item', "/merchants/#{@merchant.id}/items/#{@item.id}/edit" %>
+<%= link_to 'Edit Item', edit_merchant_item_path(@merchant, @item) %>
