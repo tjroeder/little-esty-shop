@@ -60,6 +60,7 @@ RSpec.describe 'merchant dashboard page', type: :feature do
         expect(page).to have_content(merch_1.name)
       end
     end
+
     describe 'view links' do
       it "displays link to merchant item index " do
 
@@ -95,7 +96,6 @@ RSpec.describe 'merchant dashboard page', type: :feature do
       end
 
       it "shows the items invoice ids" do
-        save_and_open_page
         expect(page).to have_content("Invoice id# #{item_2.invoices.ids.first}" )
         expect(page).to have_content("Invoice id# #{item_3.invoices.ids.first}")
         expect(page).to have_content("Invoice id# #{item_5.invoices.ids.first}")
