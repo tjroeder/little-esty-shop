@@ -16,4 +16,9 @@ class Customer < ApplicationRecord
                         .order(count: :desc)
                         .limit(5)
   end
+
+  # Instance Methods
+  def full_name
+    first_name + ' ' + last_name
+  end
 end
