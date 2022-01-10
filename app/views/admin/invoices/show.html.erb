@@ -2,6 +2,12 @@
 <p>Status: <%= @invoices.status %></p>
 <p>Created on: <%= @invoices.created_at_formatted %></p>
 <p>Customer: <%= @invoices.customer.customer_full_name %></p>
-<h3>Items: <% @invoices.items.each do |item| %> </h3>
-  <p> <%= item.name %> </p>
+<p>Total Revenue: <%= @invoices.total_revenue %> </p>
+<h2>Items: <% @invoices.items.each do |item| %> </h2>
+<!-- should we iterate through invoice items and add the quanitiy for each -->
+<!-- to get a total quantity? unsure what the story is asking -->
+  <h4> <%= item.name %> </h4>
+    <p> Quantity ordered: <%= item.invoice_items.count %> </p>
+    <p> Price Item sold for: <%= cents_to_dollars(item.unit_price) %></p>
+    <p> Status: <%=  %></p>
   <% end  %>

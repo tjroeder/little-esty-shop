@@ -44,4 +44,16 @@ RSpec.describe 'admin invoices index dashboard page', type: :feature do
     expect(page).to have_content(invoice_1.items[1].name)
     expect(page).to have_content(invoice_1.items.last.name)
   end
+
+  it "shows the quanity per item" do
+    expect(page).to have_content(invoice_1.invoice_items.count)
+  end
+
+  it "shows the quanity per item" do
+    expect(page).to have_content(invoice_1.items.first.unit_price)
+  end
+
+  it "shows the total revenue of the invoice" do
+    expect(page).to have_content(invoice_1.total_revenue)
+  end
 end
