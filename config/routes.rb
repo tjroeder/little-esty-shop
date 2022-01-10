@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   resources :admin, only: [:index]
   namespace :admin do
-    resources :merchants, only: [:index, :show, :edit, :update] do
+    resources :merchants do
       patch 'status_change'
     end
     resources :invoices, only: [:index]
