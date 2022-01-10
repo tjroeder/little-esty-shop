@@ -24,9 +24,9 @@ RSpec.describe "items/index", type: :feature do
 
   it 'changes status to enabled' do
     expect(@item_1.status).to eq('Disabled')
-    click_button "Enable/Disable"
+    click_button "Enable"
     expect('Enabled Items').to appear_before(@item_1.name)
-    click_button 'Enable/Disable'
+    click_button 'Disable'
     expect('Disabled Items').to appear_before(@item_1.name)
   end
 end
