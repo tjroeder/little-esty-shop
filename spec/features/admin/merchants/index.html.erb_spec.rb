@@ -25,4 +25,14 @@ RSpec.describe 'admin merchants index dashboard page', type: :feature do
         expect(current_path).to eq(new_admin_merchant_path)
       end
     end
+    describe 'enable and disable of merchants' do
+      it "enables or disbales merchants depending on status" do
+        expect(merch_1.status).to eq('Disabled')
+        click_button "Enable #{merch_1.name}"
+        expect('Enabled Merchants').to appear_before(merch_1.name)
+        expect('Disabled Merchants').to_not appear_before(merch_1.name)
+        click_button "Disable #{merch_1.name}"
+        expect('Disabled Merchants').to appear_before(merch_1.name)
+      end
+    end
 end

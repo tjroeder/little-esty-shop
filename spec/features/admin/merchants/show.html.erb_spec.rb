@@ -17,15 +17,4 @@ RSpec.describe 'admin merchants index dashboard page', type: :feature do
       click_link "Update Merchant"
       expect(current_path).to eq(edit_admin_merchant_path(merch_1))
     end
-    
-    it 'changes status to enabled' do
-      expect(merch_1.status).to eq('Disabled')
-      click_button "Enable"
-      expect('Enabled Merchants').to appear_before(merch_1.name)
-      expect(merch_1.status).to eq('Enabled')
-      click_button 'Disable'
-      expect('Disabled Merchant').to appear_before(merch_1.name)
-      expect(merch_1.status).to eq('Disabled')
-    end
-
 end

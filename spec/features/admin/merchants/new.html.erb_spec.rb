@@ -7,10 +7,11 @@ RSpec.describe 'admin merchants index dashboard page', type: :feature do
   describe 'new merchant page ' do
     it "has form to create a new merchant" do
       expect(page).to have_field(:name)
-      fill_in(:name, with: "Wade")
+      fill_in(:name, with: "#{merch_1.name}")
       click_button("Submit")
       expect(current_path).to eq('/admin/merchants')
-      expect(page).to have_content("Wade")
+      expect(page).to have_content("#{merch_1.name}")
+      expect(merch_1.status).to eq("Disabled")
     end
   end
 end
