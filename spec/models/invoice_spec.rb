@@ -66,9 +66,21 @@ RSpec.describe Invoice, type: :model do
     it { should define_enum_for(:status).with(['in progress', 'cancelled', 'completed']) }
   end
 
+  describe 'class methods' do
+    describe '::incomplete_list' do
+      it 'returns a list of pending and packaged invoices' do
+        expect(Invoice.incomplete_list).to eq([invoice_1, invoice_2, invoice_3, invoice_5])
+      end
+
+      it 'not return shipped invoices' do
+        expect(Invoice.incomplete_list).not_to include(invoice_4, invoice_6)
+      end
+    end
+  end
+
   describe 'instance methods' do
     describe '#created_at_formatted' do
-      it 'should return created_at date formatted' do
+      it 'returns created_at date formatted' do
         invoice_1 = build(:invoice, created_at: DateTime.new(2022, 1, 5, 0 , 0, 0))
 
         expect(invoice_1.created_at_formatted).to eq('Wednesday, January 5, 2022')
