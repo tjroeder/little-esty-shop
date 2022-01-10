@@ -12,7 +12,6 @@ RSpec.describe 'admin index dashboard page', type: :feature do
   
   describe 'as an admin' do
     describe 'views page elements' do
-      
       it 'displays header for admin dashboard' do
         expect(page).to have_css('h1', text: 'Admin Dashboard')
       end
