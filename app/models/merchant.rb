@@ -7,12 +7,21 @@ class Merchant < ApplicationRecord
 
   validates :name, presence: true
 
+
   def disabled_items
     items.where(status: "Disabled")
   end
 
   def enabled_items
     items.where(status: "Enabled")
+  end
+
+  def self.disabled_merchants
+    where(status: "Disabled")
+  end
+
+  def self.enabled_merchants
+    where(status: "Enabled")
   end
 
   def top_customers
@@ -25,7 +34,7 @@ class Merchant < ApplicationRecord
 
   def items_ready_ship
     invoice_items.where('invoice_items.status = ?', 1)
-  end 
+  end
 
   def order_by_invoice
     invoices.order(:created_at).distinct
