@@ -18,4 +18,11 @@ RSpec.describe 'admin merchants index dashboard page', type: :feature do
         expect(current_path).to eq(admin_merchant_path(merch_1))
       end
     end
+    describe 'Link to create a new merchant' do
+      it "links to new page to create new merchant" do
+        expect(page).to have_link("Create New Merchant")
+        click_link "Create New Merchant"
+        expect(current_path).to eq(new_admin_merchant_path)
+      end
+    end
 end
