@@ -8,8 +8,8 @@
 
 <h2>Incomplete Invoices</h2>
 <ul>
-  <% @invoices.incomplete_list.each do |invoice| %>
-    <li id="invoice-<%= invoice.id %>">Invoice <%= link_to "##{invoice.id}", [:admin, invoice] %></li>
+  <% @invoices.incomplete_list.order_created_at.each do |invoice| %>
+    <li id="invoice-<%= invoice.id %>">Invoice <%= link_to "##{invoice.id}", [:admin, invoice] %> - <%= invoice.created_at_formatted %></li>
   <% end %>
 </ul>
 
