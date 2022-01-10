@@ -25,6 +25,20 @@ class Admin::MerchantsController < ApplicationController
     end
   end
 
+  def status_change
+    merchant = Merchant.find(params[:merchant_id])
+    if merchant.status == "Disabled"
+      merchant.status = 'Enabled'
+      merchant.save
+      redirect_to admin_merchants_path
+    # elsif item.status == 'Enabled'
+    else
+      merchant.status = 'Disabled'
+      merchant.save
+      redirect_to admin_merchants_path
+    end
+  end
+
   private
   def merchant_params
     params.require(:merchant).permit(:name)
