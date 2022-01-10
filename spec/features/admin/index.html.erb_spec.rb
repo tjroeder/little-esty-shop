@@ -78,7 +78,9 @@ RSpec.describe 'admin index dashboard page', type: :feature do
       end
       
       describe 'incomplete invoices section' do
-        let!(:ii_packaged) { create(:invoice_item, :packaged) }
+        let!(:invoice_1) { create(:invoice, created_at: DateTime.new(2022, 1, 5, 0 , 0, 0)) }
+        
+        let!(:ii_packaged) { create(:invoice_item, :packaged, invoice: invoice_1) }
         let!(:ii_shipped) { create(:invoice_item, :shipped) }
         let!(:ii_list_pending) { create_list(:invoice_item, 2, :pending) }
         
@@ -110,6 +112,25 @@ RSpec.describe 'admin index dashboard page', type: :feature do
           within("#invoice-#{ii_packaged.invoice_id}") do
             expect(page).to have_link("##{ii_packaged.invoice_id}", href: admin_invoice_path(ii_packaged.invoice))
           end
+        end
+        
+        it 'displays invoice create date next to incomplete invoices' do
+          within("#invoice-#{ii_packaged.invoice_id}") do
+            expect(page).to have_content('Wednesday, January 5, 2022')
+          end
+        end
+
+        it 'displays invoices in order created order oldest to newest' do
+          oldest_invoice = create(:invoice, created_at: DateTime.new(2000, 1, 5, 0 , 0, 0))
+          oldest_ii = create(:invoice_item, invoice: oldest_invoice)
+          visit admin_index_path
+
+          expect("#{oldest_invoice.id}").to appear_before("#{invoice_1.id}")
+          expect("#{oldest_invoice.id}").to appear_before("#{ii_list_pending[0].invoice_id}")
+          expect("#{oldest_invoice.id}").to appear_before("#{ii_list_pending[1].invoice_id}")
+          expect("#{invoice_1.id}").to appear_before("#{ii_list_pending[0].invoice_id}")
+          expect("#{invoice_1.id}").to appear_before("#{ii_list_pending[1].invoice_id}")
+          expect("#{ii_list_pending[0].invoice_id}").to appear_before("#{ii_list_pending[1].invoice_id}")
         end
       end
     end
