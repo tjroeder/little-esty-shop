@@ -12,9 +12,9 @@ RSpec.describe 'admin merchants index dashboard page', type: :feature do
       end
     end
   end
-      it "links to a merchant edit page" do
-        expect(page).to have_content("Update Merchant")
-        click_link "Update Merchant"
-        expect(current_path).to eq(edit_admin_merchant_path(merch_1))
-      end
+    it "links to a merchant edit page" do
+      expect(page).to have_content("Update Merchant")
+      click_link "Update Merchant"
+      expect(current_path).to eq(edit_admin_merchant_path(merch_1))
+    end
 end
