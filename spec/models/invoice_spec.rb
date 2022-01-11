@@ -1,7 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe Invoice, type: :model do
-
+  describe 'relationships' do
+    it { should belong_to(:customer) }
+    it { should have_many(:invoice_items) }
+    it { should have_many(:items).through(:invoice_items) }
+    it { should have_many(:transactions) }
+    it { should have_many(:merchants).through(:items) }
+  end
+  
+  describe 'validations' do
+    it { should define_enum_for(:status).with(['in progress', 'cancelled', 'completed']) }
+  end
+  
   let!(:merch_1) { Merchant.create!(name: 'name_1') }
 
   let!(:cust_1) { Customer.create!(first_name: 'fn_1', last_name: 'ln_1') }
@@ -53,17 +64,6 @@ RSpec.describe Invoice, type: :model do
   let!(:transactions_11) { Transaction.create!(invoice_id: invoice_6.id, credit_card_number: "4654405418240011", credit_card_expiration_date: "0011", result: 2)}
   let!(:transactions_12) { Transaction.create!(invoice_id: invoice_6.id, credit_card_number: "4654405418240012", credit_card_expiration_date: "0012", result: 1)}
 
-  describe 'relationships' do
-    it {should belong_to(:customer)}
-    it {should have_many(:invoice_items)}
-    it {should have_many(:items).through(:invoice_items)}
-    it {should have_many(:transactions)}
-    it {should have_many(:merchants).through(:items)}
-  end
-
-  describe 'validations' do
-    it { should define_enum_for(:status).with(['in progress', 'cancelled', 'completed']) }
-  end
 
   describe 'class methods' do
     describe '::incomplete_list' do
