@@ -25,4 +25,5 @@ class Customer < ApplicationRecord
   def purchase_count
     transactions.where('transactions.result = ?', 2).count(:transactions)
   end
+
 end
