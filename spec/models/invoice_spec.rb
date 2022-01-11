@@ -23,13 +23,12 @@ RSpec.describe Invoice, type: :model do
   let!(:item_10) { Item.create!(name: 'item_10', description: 'desc_10', unit_price: 10, merchant: merch_1) }
 
 
-  let!(:invoice_1) { Invoice.create!(status: 2, customer: cust_1) }
-  sleep(0.01)
-  let!(:invoice_2) { Invoice.create!(status: 2, customer: cust_2) }
-  let!(:invoice_5) { Invoice.create!(status: 2, customer: cust_5) }
-  let!(:invoice_4) { Invoice.create!(status: 2, customer: cust_4) }
-  let!(:invoice_3) { Invoice.create!(status: 2, customer: cust_3) }
-  let!(:invoice_6) { Invoice.create!(status: 2, customer: cust_6) }
+  let!(:invoice_1) { create(:invoice, status: 2, customer: cust_1, created_at: DateTime.new(2022, 1, 5, 0 , 0, 0)) }
+  let!(:invoice_2) { create(:invoice, status: 2, customer: cust_2, created_at: DateTime.new(2021, 1, 5, 0 , 0, 0)) }
+  let!(:invoice_5) { create(:invoice, status: 2, customer: cust_5) }
+  let!(:invoice_4) { create(:invoice, status: 2, customer: cust_4) }
+  let!(:invoice_3) { create(:invoice, status: 2, customer: cust_3) }
+  let!(:invoice_6) { create(:invoice, status: 2, customer: cust_6) }
 
 
   let!(:ii_1) { InvoiceItem.create!(item: item_1, invoice: invoice_1, quantity: 1, unit_price: 1, status: 0) }
@@ -66,9 +65,27 @@ RSpec.describe Invoice, type: :model do
     it { should define_enum_for(:status).with(['in progress', 'cancelled', 'completed']) }
   end
 
+  describe 'class methods' do
+    describe '::incomplete_list' do
+      it 'returns a list of pending and packaged invoices' do
+        expect(Invoice.incomplete_list).to eq([invoice_1, invoice_2, invoice_3, invoice_5])
+      end
+
+      it 'not return shipped invoices' do
+        expect(Invoice.incomplete_list).not_to include(invoice_4, invoice_6)
+      end
+    end
+
+    describe '::order_created_at' do
+      it 'returns invoices by created at date' do
+        expect(Invoice.order_created_at).to eq([invoice_2, invoice_1, invoice_5, invoice_4, invoice_3, invoice_6])
+      end
+    end
+  end
+
   describe 'instance methods' do
     describe '#created_at_formatted' do
-      it 'should return created_at date formatted' do
+      it 'returns created_at date formatted' do
         invoice_1 = build(:invoice, created_at: DateTime.new(2022, 1, 5, 0 , 0, 0))
 
         expect(invoice_1.created_at_formatted).to eq('Wednesday, January 5, 2022')
@@ -84,7 +101,7 @@ RSpec.describe Invoice, type: :model do
     end
 
     describe  '#Items ready to ship' do
-      it "reaturns all the items ready to ship for a merchant" do
+      it "returns all the items ready to ship for a merchant" do
         invoice = create(:invoice)
         invoice_items = create_list(:invoice_item, 3, status: 1, invoice: invoice)
 

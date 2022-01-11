@@ -15,7 +15,8 @@ Rails.application.routes.draw do
     resources :merchants do
       patch 'status_change'
     end
-    resources :invoices, only: [:index]
+    resources :merchants, only: [:index, :show, :edit, :update]
+    resources :invoices, only: [:index, :show]
   end
 
   resources :transactions

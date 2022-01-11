@@ -8,6 +8,15 @@ class Invoice < ApplicationRecord
 
   enum status: ['in progress', 'cancelled', 'completed']
 
+  # Class Methods
+  def self.incomplete_list
+    joins(:invoice_items).where('invoice_items.status != ?', 2)
+  end
+
+  def self.order_created_at
+    order('invoices.created_at')
+  end
+
   # Instance Methods
   def created_at_formatted
     created_at.strftime("%A, %B %-d, %Y")
