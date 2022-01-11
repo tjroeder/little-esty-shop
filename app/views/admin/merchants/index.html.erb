@@ -18,5 +18,6 @@
 
 <h1>Top 5 Merchant by Total Revenue</h1>
 <% @merchants.top_five_merchants.each do |merchant| %>
-<p><%= link_to "#{merchant.name}", admin_merchant_path(merchant) %> $<%= merchant.revenue %></p>
+<p><%= link_to "#{merchant.name}", admin_merchant_path(merchant) %> $<%= merchant.revenue %> </p>
+<p>Top selling date for <%= "#{merchant.name}" %> was <%= merchant.best_sales.created_at_formatted %>.</p>
 <% end %>

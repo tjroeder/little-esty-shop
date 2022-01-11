@@ -60,7 +60,7 @@ RSpec.describe 'merchant invoice show page', type: :feature do
           expect(page).to have_no_content(item_4.name)
 
           expect(page).to have_no_content(item_5.name)
-          
+
           expect(page).to have_no_content(item_6.name)
 
         end

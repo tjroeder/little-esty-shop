@@ -23,12 +23,12 @@ RSpec.describe Merchant, type: :model do
   let!(:item_10) { Item.create!(name: 'item_10', description: 'desc_10', unit_price: 10, status: 'Enabled', merchant: merch_1) }
 
 
-   let!(:invoice_1) { Invoice.create!(status: 2, customer: cust_1) }
-   let!(:invoice_2) { Invoice.create!(status: 2, customer: cust_2) }
-   let!(:invoice_5) { Invoice.create!(status: 2, customer: cust_5) }
-   let!(:invoice_4) { Invoice.create!(status: 2, customer: cust_4) }
-   let!(:invoice_3) { Invoice.create!(status: 2, customer: cust_3) }
-   let!(:invoice_6) { Invoice.create!(status: 2, customer: cust_6) }
+   let!(:invoice_1) { Invoice.create!(status: 2, created_at:'11 Jan 2022', customer: cust_1) }
+   let!(:invoice_2) { Invoice.create!(status: 2, created_at:'12 Jan 2022', customer: cust_2) }
+   let!(:invoice_5) { Invoice.create!(status: 2, created_at:'13 Jan 2022', customer: cust_5) }
+   let!(:invoice_4) { Invoice.create!(status: 2, created_at:'14 Jan 2022', customer: cust_4) }
+   let!(:invoice_3) { Invoice.create!(status: 2, created_at:'15 Jan 2022', customer: cust_3) }
+   let!(:invoice_6) { Invoice.create!(status: 2, created_at:'16 Jan 2022', customer: cust_6) }
 
   let!(:ii_1) { InvoiceItem.create!(item: item_1, invoice: invoice_1, quantity: 1, unit_price: 1, status: 0) }
   let!(:ii_2) { InvoiceItem.create!(item: item_2, invoice: invoice_2, quantity: 2, unit_price: 2, status: 1) }
@@ -37,6 +37,8 @@ RSpec.describe Merchant, type: :model do
   let!(:ii_5) { InvoiceItem.create!(item: item_5, invoice: invoice_5, quantity: 3, unit_price: 5, status: 1) }
   let!(:ii_6) { InvoiceItem.create!(item: item_6, invoice: invoice_6, quantity: 3, unit_price: 6, status: 2) }
   # let!(:ii_7) { InvoiceItem.create!(item: item_7, invoice: invoice_7, quantity: 3, unit_price: 7, status: 2) }
+
+
 
   let!(:transactions_1) { Transaction.create!(invoice_id: invoice_1.id, credit_card_number: "4654405418240001", credit_card_expiration_date: "0001", result: 2)}
   let!(:transactions_2) { Transaction.create!(invoice_id: invoice_1.id, credit_card_number: "4654405418240002", credit_card_expiration_date: "0002", result: 2)}
@@ -52,6 +54,7 @@ RSpec.describe Merchant, type: :model do
   let!(:transactions_12) { Transaction.create!(invoice_id: invoice_6.id, credit_card_number: "4654405418240012", credit_card_expiration_date: "0012", result: 1)}
   # let!(:transactions_13) { Transaction.create!(invoice_id: invoice_7.id, credit_card_number: "4654405418240013", credit_card_expiration_date: "0013", result: 2)}
   # let!(:transactions_14) { Transaction.create!(invoice_id: invoice_7.id, credit_card_number: "4654405418240014", credit_card_expiration_date: "0014", result: 2)}
+
 
   describe 'relationships' do
     it {should have_many(:items)}
@@ -118,5 +121,28 @@ RSpec.describe Merchant, type: :model do
       expected = [merchants[4], merchants[2], merchants[3], merchants[1], merchants[0]]
       expect(Merchant.top_five_merchants).to eq(expected)
     end
+  end
+  it "shows date of highest revenue for each merchant" do
+    merchant = Merchant.create!(name: 'name_3')
+
+    customer1 = Customer.create!(first_name: 'wade', last_name: 'wade')
+    customer2 = Customer.create!(first_name: 'edaw', last_name: 'edaw')
+
+    item1 = Item.create!(name: 'item_8', description: 'desc_8', unit_price: 8, merchant: merchant)
+    item2 = Item.create!(name: 'item_9', description: 'desc_9', unit_price: 9, merchant: merchant)
+
+    invoice1 = Invoice.create!(status: 2, created_at:'15 Jan 2022', customer: customer1)
+    invoice2 = Invoice.create!(status: 2, created_at:'16 Jan 2022', customer: customer2)
+
+    ii1 = InvoiceItem.create!(item: item1, invoice: invoice1, quantity: 3, unit_price: 5, status: 2)
+    ii2 = InvoiceItem.create!(item: item2, invoice: invoice2, quantity: 3, unit_price: 6, status: 2)
+
+
+    transaction1 = Transaction.create!(invoice_id: invoice1.id, credit_card_number: "4654405418240011", credit_card_expiration_date: "0011", result: 2)
+    transaction2 = Transaction.create!(invoice_id: invoice2.id, credit_card_number: "4654405418240012", credit_card_expiration_date: "0012", result: 2)
+
+    expect(merch_1.best_sales.created_at).to eq(invoice_4.created_at)
+    expect(merchant.best_sales.created_at).to eq(invoice2.created_at)
+
   end
 end
