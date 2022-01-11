@@ -58,16 +58,11 @@ RSpec.describe 'merchant invoice show page', type: :feature do
       it 'does not display invoice items from other merchants' do
         within('table') do
           expect(page).to have_no_content(item_4.name)
-          expect(page).to have_no_content(invoice_item_4.quantity)
-          expect(page).to have_no_content(invoice_item_4.unit_price)
 
           expect(page).to have_no_content(item_5.name)
-          expect(page).to have_no_content(invoice_item_5.quantity)
-          expect(page).to have_no_content(invoice_item_5.unit_price)
-
+          
           expect(page).to have_no_content(item_6.name)
-          expect(page).to have_no_content(invoice_item_6.quantity)
-          expect(page).to have_no_content(invoice_item_6.unit_price)
+
         end
       end
 
