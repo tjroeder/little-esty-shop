@@ -100,4 +100,23 @@ RSpec.describe Merchant, type: :model do
       expect(merch_1.top_five_items).to eq([item_4, item_3, item_6, item_2, item_1])
     end
   end
+
+  describe 'Admin Merchant index shows top 5 merchants by revenue' do
+    it "shows top 5 merchants by revenue" do
+      merchants = create_list(:merchant, 6)
+      item1 = create(:item, merchant: merchants[0])
+      item2 = create(:item, merchant: merchants[1])
+      item3 = create(:item, merchant: merchants[2])
+      item4 = create(:item, merchant: merchants[3])
+      item5 = create(:item, merchant: merchants[4])
+      transactions = create_list(:transaction, 5, result: :success)
+      invoice_item1 = create(:invoice_item, item: item1, invoice: transactions[0].invoice, unit_price: 300, quantity: 2)
+      invoice_item2 = create(:invoice_item, item: item2, invoice: transactions[1].invoice, unit_price: 400, quantity: 2)
+      invoice_item3 = create(:invoice_item, item: item3, invoice: transactions[2].invoice, unit_price: 500, quantity: 3)
+      invoice_item4 = create(:invoice_item, item: item4, invoice: transactions[3].invoice, unit_price: 600, quantity: 2)
+      invoice_item5 = create(:invoice_item, item: item5, invoice: transactions[4].invoice, unit_price: 1000, quantity: 2)
+      expected = [merchants[4], merchants[2], merchants[3], merchants[1], merchants[0]]
+      expect(Merchant.top_five_merchants).to eq(expected)
+    end
+  end
 end
