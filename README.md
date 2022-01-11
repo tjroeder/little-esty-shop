@@ -37,19 +37,20 @@ This project requires Ruby 2.7.2.
 1. [Extensions](./doc/extensions.md)
 1. [Evaluation](./doc/evaluation.md)
 
+## Heroku Deployment
+- The deployment to Heroku can be found [here]
+
 ## Schema
 ![image](https://user-images.githubusercontent.com/78194232/148001346-16797f55-3f82-4c71-b79e-5f822fb32130.png)
 
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-  <tr>
-    <td align="center"><a href="https://github.com/tjroeder"><img src="https://avatars.githubusercontent.com/u/78194232?v=4" width="100px;" alt=""/><br /><sub><b>Tim (he/him)</b></sub></a><br /><a href="https://github.com/tjroeder/relational_rails/commits?author=tjroeder" title="Code">💻</a> <a href="#ideas-tjroeder" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/tjroeder/relational_rails/commits?author=tjroeder" title="Tests">⚠️</a> <a href="https://github.com/tjroeder/relational_rails/pulls?q=is%3Apr+reviewed-by%3Atjroeder" title="Reviewed Pull Requests">👀</a></td>
-  </tr>
-</table>
 
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
+## Contributors 
 
-<!-- ALL-CONTRIBUTORS-LIST:END -->
+- [Arnaldo Aparicio](https://github.com/arnaldoaparicio)
+- [Eric Chon](https://github.com/echon006)
+- [Tim Roeder](https://github.com/tjroeder)
+- [Wade Naughton](https://github.com/WadeNaughton)
+
+
+
+
