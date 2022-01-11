@@ -7,6 +7,10 @@ class Admin::InvoicesController < ApplicationController
     @invoice = Invoice.find(invoice_params[:id])
   end
 
+  def update
+
+  end
+
   private
 
   def invoice_params

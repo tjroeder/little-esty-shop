@@ -10,4 +10,7 @@
     <p> Quantity ordered: <%= ii.quantity %> </p>
     <p> Price Item sold for: <%= cents_to_dollars(ii.unit_price) %></p>
     <p> Status: <%= ii.status %></p>
+    <%= form_with model: [:admin, @invoice], local: true do |form| %>
+      <p><%= form.select :status, ['pending', 'packaged', 'shipped'] %> <%= form.submit 'Update Invoice Status' %></p>
+    <% end %>
   <% end  %>
