@@ -110,12 +110,12 @@ RSpec.describe Merchant, type: :model do
       item4 = create(:item, merchant: merchants[3])
       item5 = create(:item, merchant: merchants[4])
       transactions = create_list(:transaction, 5, result: :success)
-      invoice_item1 = create(:invoice_item, item: item1, invoice: transactions[0].invoice, unit_price: 3, quantity: 2)
-      invoice_item2 = create(:invoice_item, item: item2, invoice: transactions[1].invoice, unit_price: 4, quantity: 2)
-      invoice_item3 = create(:invoice_item, item: item3, invoice: transactions[2].invoice, unit_price: 5, quantity: 2)
-      invoice_item4 = create(:invoice_item, item: item4, invoice: transactions[3].invoice, unit_price: 6, quantity: 2)
-      invoice_item5 = create(:invoice_item, item: item5, invoice: transactions[4].invoice, unit_price: 1, quantity: 2)
-      expected = [merchants[3], merchants[2], merchants[1], merchants[0], merchants[4]]
+      invoice_item1 = create(:invoice_item, item: item1, invoice: transactions[0].invoice, unit_price: 300, quantity: 2)
+      invoice_item2 = create(:invoice_item, item: item2, invoice: transactions[1].invoice, unit_price: 400, quantity: 2)
+      invoice_item3 = create(:invoice_item, item: item3, invoice: transactions[2].invoice, unit_price: 500, quantity: 3)
+      invoice_item4 = create(:invoice_item, item: item4, invoice: transactions[3].invoice, unit_price: 600, quantity: 2)
+      invoice_item5 = create(:invoice_item, item: item5, invoice: transactions[4].invoice, unit_price: 1000, quantity: 2)
+      expected = [merchants[4], merchants[2], merchants[3], merchants[1], merchants[0]]
       expect(Merchant.top_five_merchants).to eq(expected)
     end
   end
