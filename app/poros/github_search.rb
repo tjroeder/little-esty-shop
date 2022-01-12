@@ -30,6 +30,7 @@ class GithubSearch
     commits = commit_info
     pull_requests = pull_request_info
     contributors = contributor_info
+
     repo_data = @service.get_url(@service.repo_url, false)
 
     contributors.each do |cont|
@@ -43,9 +44,9 @@ class GithubSearch
     end
     
     repo = Repo.new(repo_data)
-    repo.contributors << contributors
-    repo.commits << commits
-    repo.pull_requests << pull_requests
+    repo.contributors = contributors
+    repo.commits = commits
+    repo.pull_requests = pull_requests
 
     repo
   end
