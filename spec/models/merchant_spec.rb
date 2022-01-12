@@ -15,6 +15,7 @@ RSpec.describe Merchant, type: :model do
 
   let!(:merch_1) { Merchant.create!(name: 'name_1') }
   let!(:merch_2) { create(:merch_w_all, customer_count: 2) }
+  let!(:merch_3) { Merchant.create!(name: 'name_3', status: 'Enabled') }
 
   let!(:cust_1) { Customer.create!(first_name: 'fn_1', last_name: 'ln_1') }
   let!(:cust_2) { Customer.create!(first_name: 'fn_2', last_name: 'ln_2') }
@@ -94,6 +95,15 @@ RSpec.describe Merchant, type: :model do
 
     it 'shows enabled items' do
       expect(merch_1.enabled_items).to eq([item_10])
+    end
+  end
+
+  describe 'merchant statuses that are grouped' do
+    it "groups merchants by status and shows status" do
+      expect(Merchant.disabled_merchants).to eq([merch_1, merch_2])
+    end
+    it "groups merchants by status and shows status" do
+      expect(Merchant.enabled_merchants).to eq([merch_3])
     end
   end
 
