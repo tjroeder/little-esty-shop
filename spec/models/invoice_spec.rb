@@ -68,7 +68,10 @@ RSpec.describe Invoice, type: :model do
   describe 'class methods' do
     describe '::incomplete_list' do
       it 'returns a list of pending and packaged invoices' do
-        expect(Invoice.incomplete_list).to eq([invoice_1, invoice_2, invoice_3, invoice_5])
+        expect(Invoice.incomplete_list.pluck(:id)).to include(invoice_1.id)
+        expect(Invoice.incomplete_list.pluck(:id)).to include(invoice_2.id)
+        expect(Invoice.incomplete_list.pluck(:id)).to include(invoice_3.id)
+        expect(Invoice.incomplete_list.pluck(:id)).to include(invoice_5.id)
       end
 
       it 'not return shipped invoices' do
