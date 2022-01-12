@@ -10,6 +10,4 @@ class Item < ApplicationRecord
   validates :description, presence: true
   validates :unit_price, presence: true
 
-
-  
 end
