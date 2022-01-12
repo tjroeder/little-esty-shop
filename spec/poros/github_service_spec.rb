@@ -24,8 +24,34 @@ RSpec.describe GithubService, type: :poro do
   end
 
   describe 'instance methods' do
+    describe '#get_url' do
+      it 'will gather more than 30 commits if query is true' do
+        VCR.use_cassette('little_esty_shop_commits') do
+          url = gh_service_1.commit_url
+          result = gh_service_1.get_url(url, true)
+
+          expect(result.count).to be > (30)
+        end
+      end
+
+      it 'will gather less than 30 commits if query is false' do
+        VCR.use_cassette('little_esty_shop_30_commits') do
+          url = gh_service_1.commit_url
+          result = gh_service_1.get_url(url, false)
+
+          expect(result.count).to eq(30)
+        end
+      end
+    end
+
     describe '#get_request' do
-      
+      it 'returns a hash if given correct URL' do
+        VCR.use_cassette('little_esty_shop_repo') do
+          url = gh_service_1.repo_url
+
+          expect(gh_service_1.get_request(url)).to be_a(Hash)
+        end
+      end
     end
   end
 end
