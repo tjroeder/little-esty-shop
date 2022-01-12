@@ -1,1 +1,15 @@
 <h1>Invoice #<%= @invoice.id %></h1>
+
+<h1> Invoice - <%= @invoice.id %></h1>
+<p>Status: <%= @invoice.status %></p>
+<p>Created on: <%= @invoice.created_at_formatted %></p>
+<p>Customer: <%= @invoice.customer.full_name %></p>
+<p>Total Revenue: <%= @invoice.total_revenue %> </p>
+<h2>Items: <% @invoice.items.each do |item| %> </h2>
+<!-- should we iterate through invoice items and add the quanitiy for each -->
+<!-- to get a total quantity? unsure what the story is asking -->
+  <h4> <%= item.name %> </h4>
+    <p> Quantity ordered: <%= item.invoice_items.count %> </p>
+    <p> Price Item sold for: <%= cents_to_dollars(item.unit_price) %></p>
+    <p> Status: <%=  %></p>
+  <% end  %>
