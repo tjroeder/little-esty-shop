@@ -10,7 +10,7 @@ class Invoice < ApplicationRecord
 
   # Class Methods
   def self.incomplete_list
-    joins(:invoice_items).where('invoice_items.status != ?', 2)
+    joins(:invoice_items).where('invoice_items.status != ?', 2).select('invoices.*').group('invoices.id')
   end
 
   def self.order_created_at

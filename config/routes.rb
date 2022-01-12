@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   resources :merchants do
     resources :dashboard, only: [:index]
     resources :items
@@ -14,7 +13,4 @@ Rails.application.routes.draw do
     resources :merchants, only: [:index, :show, :edit, :update]
     resources :invoices, only: [:index, :show, :update]
   end
-
-  resources :transactions
-  resources :customers
 end
