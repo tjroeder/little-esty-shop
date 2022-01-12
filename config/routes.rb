@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
+  get '/', to: 'welcome#index'
   resources :merchants do
     resources :dashboard, only: [:index]
     resources :items
-    resources :invoices, only: [:index, :show] # TODO Update to use merchant_invoices controller
+    resources :invoices, only: [:index, :show]
     resources :invoice_items, only: [:update]
   end
 
