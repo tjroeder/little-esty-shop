@@ -37,5 +37,20 @@ This project requires Ruby 2.7.2.
 1. [Extensions](./doc/extensions.md)
 1. [Evaluation](./doc/evaluation.md)
 
+## Heroku Deployment
+- The deployment to Heroku can be found [here]
+
 ## Schema
 ![image](https://user-images.githubusercontent.com/78194232/148001346-16797f55-3f82-4c71-b79e-5f822fb32130.png)
+
+
+## Contributors 
+
+- [Arnaldo Aparicio](https://github.com/arnaldoaparicio)
+- [Eric Chon](https://github.com/echon006)
+- [Tim Roeder](https://github.com/tjroeder)
+- [Wade Naughton](https://github.com/WadeNaughton)
+
+
+
+

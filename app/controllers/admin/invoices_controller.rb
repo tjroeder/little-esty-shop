@@ -4,12 +4,18 @@ class Admin::InvoicesController < ApplicationController
   end
 
   def show
-    @invoice = Invoice.find(invoice_params[:id])
+    @invoice = Invoice.find(params[:id])
+  end
+
+  def update
+    invoice = Invoice.find(params[:id])
+    invoice.update(invoice_params)
+    redirect_to admin_invoice_path
   end
 
   private
 
   def invoice_params
-    params.permit(:id)
+    params.require(:invoice).permit(:id, :customer_id, :status)
   end
 end
