@@ -33,5 +33,4 @@ class Invoice < ApplicationRecord
   def total_revenue
     cents_to_dollars(invoice_items.sum('unit_price * quantity'))
   end
-  
 end
