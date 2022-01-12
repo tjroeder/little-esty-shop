@@ -1,8 +1,5 @@
 <h1>Item Info</h1>
 
-<% if flash[:notice] %>
-    <div class="notice"><%= flash[:notice] %></div>
-  <% end %>
 <p>Name: <%= @item.name %></p>
 <p>Description: <%= @item.description %></p>
 <p>Current Selling Price: <%= @item.unit_price %></p>
