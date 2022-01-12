@@ -1,5 +1,4 @@
-require 'spec_helper'
-require '../app/poros/contributor'
+require 'rails_helper'
 
 RSpec.describe Contributor, type: :poro do
   let!(:contributor_1) do
