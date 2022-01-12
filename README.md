@@ -123,7 +123,7 @@ Next we will seed environment with generic data by using CSV files by running th
 $ rake csv_load:all
 ```
 
-5. Startup and Access<br>
+6. Startup and Access<br>
 Finally, in order to use the web app you will have to start the server locally and access the app through a web browser. 
 - Start server
 ```shell
