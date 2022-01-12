@@ -107,8 +107,8 @@ RSpec.describe Invoice, type: :model do
 
         expect(invoice.items_ready_ship).to eq([invoice_items[0], invoice_items[1], invoice_items[2]])
       end
-    end 
-    
+    end
+
     describe '#total_revenue' do
       it 'should return the total revenue for the invoice' do
         invoice_1 = create(:invoice)
@@ -119,7 +119,7 @@ RSpec.describe Invoice, type: :model do
 
         expect(invoice_1.total_revenue).to eq('$13.00')
       end
-      
+
       it 'should not return revenue from other items not on the invoice' do
         invoice_1 = create(:invoice)
         item_1 = create(:item)
@@ -129,5 +129,6 @@ RSpec.describe Invoice, type: :model do
         expect(invoice_1.total_revenue).to eq('$3.00')
       end
     end
+
   end
 end
