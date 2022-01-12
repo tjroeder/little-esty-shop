@@ -54,10 +54,22 @@ RSpec.describe 'admin invoices index dashboard page', type: :feature do
   end
 
   it "shows the status per item" do
-    expect(page).to have_content(invoice_1.invoice_items.first.status)
+    expect(page).to have_content(invoice_1.status)
   end
 
   it "shows the total revenue of the invoice" do
     expect(page).to have_content(invoice_1.total_revenue)
+  end
+
+  it "checks that the status is being updated" do
+    expect(page).to have_content(invoice_1.status)
+    expect(page).to have_select('invoice_status', options: ['in progress', 'cancelled', 'completed'], selected: 'completed')
+  end
+
+  it "status changes once a new status if selected " do
+    select('in progress', from: 'invoice_status')
+    click_button('Update Invoice Status')
+
+    expect(page).to have_select('invoice_status', selected: 'in progress')
   end
 end
