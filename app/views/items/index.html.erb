@@ -2,7 +2,7 @@
 
 <h2>Top 5 Items Based on Total Revenue</h2>
   <%@merchant.top_five_items.each do |item| %>
-    <p><%= item.name %></p>
+    <p><h4><%=link_to item.name, merchant_item_path(@merchant, item) %>  Total Revenue: <%= number_to_currency(item.revenue.to_f / 100) %></h4> Top selling date for <%= item.name %> was <%= item.best_day %>.</p>
   <% end %>
 
 <h2>Enabled Items</h2>
