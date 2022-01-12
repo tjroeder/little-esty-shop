@@ -81,36 +81,38 @@ RSpec.describe GithubSearch, type: :poro do
 
     describe '#repo_info' do
       it 'creates Repo object' do
-        VCR.use_cassette('little_esty_shop_commits') do
-          VCR.use_cassette('little_esty_shop_pull_requests') do
-            VCR.use_cassette('little_esty_shop_contributors') do
-              VCR.use_cassette('little_esty_shop_repo') do
-                repo = gh_search_1.repo_info
+        cassettes = [
+                    { name: 'little_esty_shop_commits' }, 
+                    { name: 'little_esty_shop_pull_requests' }, 
+                    { name: 'little_esty_shop_contributors' }, 
+                    { name: 'little_esty_shop_repo' }
+                    ]
+                    
+        VCR.use_cassettes(cassettes) do
+          repo = gh_search_1.repo_info
 
-                expect(repo).to be_a(Repo)
-              end
-            end
-          end
+          expect(repo).to be_a(Repo)
         end
       end
 
       it 'creates Repo object with commits array, contributor array, commits array and pull_requests array' do
-        VCR.use_cassette('little_esty_shop_commits') do
-          VCR.use_cassette('little_esty_shop_pull_requests') do
-            VCR.use_cassette('little_esty_shop_contributors') do
-              VCR.use_cassette('little_esty_shop_repo') do
-                repo = gh_search_1.repo_info
+        cassettes = [
+                    { name: 'little_esty_shop_commits' }, 
+                    { name: 'little_esty_shop_pull_requests' }, 
+                    { name: 'little_esty_shop_contributors' }, 
+                    { name: 'little_esty_shop_repo' }
+                    ]
 
-                expect(repo).to have_attributes(name: 'little-esty-shop')
-                expect(repo.commits.first).to be_a(Commit)
-                expect(repo.commits).to be_a(Array)
-                expect(repo.pull_requests.first).to be_a(PullRequest)
-                expect(repo.pull_requests).to be_a(Array)
-                expect(repo.contributors.first).to be_a(Contributor)
-                expect(repo.contributors).to be_a(Array)
-              end
-            end
-          end
+        VCR.use_cassettes(cassettes) do
+          repo = gh_search_1.repo_info
+
+          expect(repo).to have_attributes(name: 'little-esty-shop')
+          expect(repo.commits.first).to be_a(Commit)
+          expect(repo.commits).to be_a(Array)
+          expect(repo.pull_requests.first).to be_a(PullRequest)
+          expect(repo.pull_requests).to be_a(Array)
+          expect(repo.contributors.first).to be_a(Contributor)
+          expect(repo.contributors).to be_a(Array)
         end
       end
     end
