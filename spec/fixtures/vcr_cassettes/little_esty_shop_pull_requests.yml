@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.github.com/repos/tjroeder/little-esty-shop/pulls
+    uri: https://api.github.com/repos/tjroeder/little-esty-shop/pulls?per_page=100
     body:
       encoding: US-ASCII
       string: ''
@@ -21,7 +21,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Wed, 12 Jan 2022 05:15:30 GMT
+      - Wed, 12 Jan 2022 07:21:38 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -56,19 +56,19 @@ http_interactions:
       X-Ratelimit-Limit:
       - '60'
       X-Ratelimit-Remaining:
-      - '56'
+      - '53'
       X-Ratelimit-Reset:
-      - '1641967840'
+      - '1641973451'
       X-Ratelimit-Resource:
       - core
       X-Ratelimit-Used:
-      - '4'
+      - '7'
       Accept-Ranges:
       - bytes
       X-Github-Request-Id:
-      - 8A11:47DE:C23D41:1856405:61DE63F2
+      - 9722:58D2:10D4068:20A1234:61DE8182
     body:
       encoding: UTF-8
       string: "[]"
-  recorded_at: Wed, 12 Jan 2022 05:15:30 GMT
+  recorded_at: Wed, 12 Jan 2022 07:21:38 GMT
 recorded_with: VCR 6.0.0
