@@ -1,4 +1,5 @@
 require 'rails_helper'
+
 RSpec.describe 'admin invoices index dashboard page', type: :feature do
   let!(:merch_1) { Merchant.create!(name: 'name_1') }
 
