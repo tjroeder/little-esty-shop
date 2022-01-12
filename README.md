@@ -41,7 +41,7 @@ This project requires Ruby 2.7.2.
 - The deployment to Heroku can be found [here]
 
 ## Schema
-![image](https://user-images.githubusercontent.com/78194232/148001346-16797f55-3f82-4c71-b79e-5f822fb32130.png)
+![image](https://user-images.githubusercontent.com/78194232/149197741-b873de21-7732-4b1f-9706-6a0b0014c978.png)
 
 
 ## Contributors 
